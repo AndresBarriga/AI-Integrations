@@ -16,8 +16,6 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import CodeVisualizer from "./CodeVisualizer";
 
-const serverUrl = process.env.REACT_APP_SERVER_URL;
-
 function CodeCommentingApp() {
     const [language, setLanguage] = useState("");
     const [code, setCode] = useState("");
@@ -32,11 +30,6 @@ function CodeCommentingApp() {
         setProficiencyLevel(event.target.value);
     };
     
-    const exampleCode = `
-    function add(a, b) {
-      return a + b;
-    }
-  `;
 
 
   
@@ -44,7 +37,7 @@ function CodeCommentingApp() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        fetch(serverUrl + "/code/automatic-comments", {
+        fetch("ai-integrations-back.vercel.app/code/automatic-comments", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
