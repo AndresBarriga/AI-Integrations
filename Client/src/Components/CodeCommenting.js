@@ -16,6 +16,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import CodeVisualizer from "./CodeVisualizer";
 
+const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 function CodeCommentingApp() {
     const [language, setLanguage] = useState("");
@@ -43,7 +44,7 @@ function CodeCommentingApp() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        fetch("http://localhost:3001/code/automatic-comments", {
+        fetch(serverUrl + "/code/automatic-comments", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

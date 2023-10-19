@@ -19,7 +19,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import dayjs from 'dayjs';
-
+const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 function MeetingNotesApp() {
   const [title, setTitle] = useState("");
@@ -65,7 +65,7 @@ function MeetingNotesApp() {
     setLoading(true);
     
     
-    fetch("http://localhost:3001/MeetingNotesWriter", {
+    fetch(serverUrl + "/MeetingNotesWriter", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

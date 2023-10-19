@@ -21,7 +21,7 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
 
-
+const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 
 /* PROMPT FOR TESTING PURPOSES
@@ -110,7 +110,7 @@ function TestAutomatedApp() {
       const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        fetch("http://localhost:3001/code/automatic-tests/user-story", {
+        fetch(serverUrl + "/code/automatic-tests/user-story", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

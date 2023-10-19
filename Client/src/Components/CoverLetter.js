@@ -15,6 +15,8 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { selectClasses } from "@mui/material";
 
+const serverUrl = process.env.REACT_APP_SERVER_URL;
+
 
 function CoverLetterApp() {
   const [cv, setCv] = useState("");
@@ -39,7 +41,7 @@ const [selectedTone, setSelectedTone] = useState("Formal Tone");
     setLoading(true);
     const lengthAsString = length.toString()
     
-    fetch("http://localhost:3001/coverLetterWriter", {
+    fetch( serverUrl + "/coverLetterWriter", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
