@@ -41,7 +41,7 @@ const [selectedTone, setSelectedTone] = useState("Formal Tone");
     setLoading(true);
     const lengthAsString = length.toString()
     
-    fetch( serverUrl + "/coverLetterWriter", {
+    fetch("https://ai-integrations-back.vercel.app/coverLetterWriter", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

@@ -65,7 +65,7 @@ function MeetingNotesApp() {
     setLoading(true);
     
     
-    fetch(serverUrl + "/MeetingNotesWriter", {
+    fetch("https://ai-integrations-back.vercel.app/MeetingNotesWriter", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

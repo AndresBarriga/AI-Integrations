@@ -110,7 +110,7 @@ function TestAutomatedApp() {
       const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        fetch(serverUrl + "/code/automatic-tests/user-story", {
+        fetch("https://ai-integrations-back.vercel.app/code/automatic-tests/user-story", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

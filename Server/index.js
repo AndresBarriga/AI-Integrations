@@ -12,8 +12,19 @@ const openai = new OpenAI({
     });
 
 
+const allowedOrigins = ['https://ai-integrations-front.vercel.app'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 /* To handle text generation for /coverLetterWritter
 Promp kept separately to improve code redability */
