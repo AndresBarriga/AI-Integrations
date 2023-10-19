@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-{
-    "builds": [
-     { 
-        "src": "*.js",
-        "use": "@vercel/node" }
-    ]
-  }
-=======
+
 {
     "builds": [
      { 
@@ -20,4 +12,3 @@
             "dest": "/" }
         ]
   }
->>>>>>> origin/main
