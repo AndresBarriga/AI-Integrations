@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# OpenAI Integration App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is an integration with OpenAI, allowing users to input text prompts and receive generated responses based on the provided prompts.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Client](#client)
+- [Server](#server)
+- [Features](#features)
+- [Live Version](#live-version)
+- [Getting Started](#getting-started)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-### `npm start`
+## Client
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The client side of the application consists of React components that facilitate user interaction. Here's how it works:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Users provide input in the React components.
+2. The input is sent to the server.
+3. The server places the input into a prompt and makes an API call to OpenAI.
+4. The server receives the response and sends it back to the React components for rendering.
 
-### `npm test`
+## Server
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The server handles the server-side logic, including making API calls to OpenAI. To ensure smooth operation and avoid timeout limitations, server functions have been deployed on Firebase.
 
-### `npm run build`
+## Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+At the moment, the app offers the following features:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Meeting Notes Writer**: Generate meeting notes from user input.
+2. **Cover Letter Writer**: Generate cover letters based on user-provided content.
+3. **Code Commenting Functionality**: Automatically add comments to code snippets.
+4. **Draft Unit Test Functionality**: Generate unit test drafts.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Live Version
 
-### `npm run eject`
+You can access the live version of this application hosted on Vercel https://ai-integrations-front.vercel.app/ .
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Getting Started
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run this project locally, follow these steps:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Clone the repository.
+2. Set up the client and server components.
+3. Ensure you have the required API keys and credentials for OpenAI.
+4. Install dependencies.
+5. Deploy Firebase Functions
+6. React Components will fetch the Firebase Function URL
+7. Run your application
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is licensed under the [MIT License](/LICENSE).
 
-### Code Splitting
+## Contact
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+If you have questions, feedback, or need assistance, you can reach out to us at andresbarrigaru@gmail.com or via (https://www.linkedin.com/in/andres-barriga/)
 
-### Analyzing the Bundle Size
+We hope you find this project helpful and welcome your contributions to make it even better!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
