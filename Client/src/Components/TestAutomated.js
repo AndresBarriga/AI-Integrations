@@ -110,7 +110,7 @@ function TestAutomatedApp() {
       const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        fetch("https://ai-integrations-back.vercel.app/code/automatic-tests/user-story", {
+        fetch("https://us-central1-ai-integrations960809.cloudfunctions.net/testAutomatedUS", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -136,7 +136,7 @@ function TestAutomatedApp() {
       const handleSubmitsecondary = (e) => {
         e.preventDefault();
         setLoadingUnitTest(true);
-        fetch("http://localhost:3001/code/automatic-tests/unit-testing", {
+        fetch("https://us-central1-ai-integrations960809.cloudfunctions.net/testAutomatedCode", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

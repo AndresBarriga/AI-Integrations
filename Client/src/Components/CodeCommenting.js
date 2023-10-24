@@ -37,7 +37,7 @@ function CodeCommentingApp() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        fetch("ai-integrations-back.vercel.app/code/automatic-comments", {
+        fetch("https://us-central1-ai-integrations960809.cloudfunctions.net/codeCommenting", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
