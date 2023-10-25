@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+import LinearProgress from '@mui/material/LinearProgress';
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
 import Paper from '@mui/material/Paper';
@@ -221,9 +222,20 @@ function MeetingNotesApp() {
       </Box>
 
       {loading && (
-  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh' }}>
-    <CircularProgress />
-  </Box>
+  <><Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh' }}>
+          <CircularProgress />
+        </Box>
+        <Box sx={{ width: '100%'}}>
+            <Typography variant="body1" gutterBottom
+              sx={{
+                textAlign: 'center'
+              }}>
+              Time to Grab a Snack - We'll Be Ready in up to 45 Seconds.
+            </Typography>
+            <LinearProgress 
+          />
+          </Box></>
+  
   )}
 
 

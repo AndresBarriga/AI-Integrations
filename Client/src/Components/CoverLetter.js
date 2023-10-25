@@ -8,6 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Paper from '@mui/material/Paper';
 import Slider from '@mui/material/Slider';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import LinearProgress from '@mui/material/LinearProgress';
 import Switch from '@mui/material/Switch';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -33,11 +34,28 @@ const [selectedTone, setSelectedTone] = useState("Formal Tone");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
   const [generatedCoverLetter, setGeneratedCoverLetter] = useState("");
+  const [cvError, setCvError] = useState('');
+  const [jobofferError, setJobofferError] = useState('');
 
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Validate CV input
+    if (!cv) {
+      setCvError("CV is required");
+      setLoading(false);
+      return;
+    }
+
+    // Validate joboffer input
+    if (!joboffer) {
+      setJobofferError("Job Offer is required");
+      setLoading(false);
+      return;
+    }
+
+
     setLoading(true);
     const lengthAsString = length.toString()
     
@@ -93,22 +111,32 @@ const [selectedTone, setSelectedTone] = useState("Formal Tone");
           Explore the power of AI to help you create a Cover Letter that perfectly match your experience and suited for the job you are applying
         </Typography>
         <TextField
-          id="cv"
-          label="Your CV"
-          value={cv}
-          placeholder="Paste your CV here"
-          onChange={(e) => setCv(e.target.value)}
-          multiline
-          maxRows={6}
-        />
+        id="cv"
+        label="Your CV"
+        value={cv}
+        placeholder="Paste your CV here"
+        onChange={(e) => {
+          setCv(e.target.value);
+          setCvError(""); // Clear cv input error when the user makes a change
+        }}
+        multiline
+        maxRows={6}
+        error={!!cvError} // Set error state based on the presence of an error message
+        helperText={cvError} // Display error message
+      />
         <TextField
-          id="joboffer"
-          label="Job Offer"
-          value={joboffer}
-          placeholder="Paste the Job Offer you are applying for"
-          onChange={(e) => setJoboffer(e.target.value)}
-          multiline
-          maxRows={6}
+        id="joboffer"
+        label="Job Offer"
+        value={joboffer}
+        placeholder="Paste the Job Offer you are applying for"
+        onChange={(e) => {
+          setJoboffer(e.target.value);
+          setJobofferError(""); // Clear joboffer input error when the user makes a change
+        }}
+        multiline
+        maxRows={6}
+        error={!!jobofferError} // Set error state based on the presence of an error message
+        helperText={jobofferError} // Display error message
         />
         
          <Typography variant="h5" style={{ paddingTop: "20px" }} gutterBottom
@@ -209,9 +237,20 @@ const [selectedTone, setSelectedTone] = useState("Formal Tone");
       </Box>
 
       {loading && (
-  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh' }}>
-    <CircularProgress />
-  </Box>
+  <><Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh' }}>
+          <CircularProgress />
+        </Box>
+        <Box sx={{ width: '100%'}}>
+            <Typography variant="body1" gutterBottom
+              sx={{
+                textAlign: 'center'
+              }}>
+              Time to Grab a Snack - We'll Be Ready in up to 45 Seconds.
+            </Typography>
+            <LinearProgress 
+          />
+          </Box></>
+  
   )}
 
 

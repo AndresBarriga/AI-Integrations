@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
+import LinearProgress from '@mui/material/LinearProgress';
 import Paper from '@mui/material/Paper';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
@@ -19,6 +20,7 @@ import CodeVisualizer from "./CodeVisualizer";
 function CodeCommentingApp() {
     const [language, setLanguage] = useState("");
     const [code, setCode] = useState("");
+    const [codeError, setCodeError] = useState('');
     const [featurePurpose, setFeaturePurpose] = useState("");
     const [proficiencyLevel, setProficiencyLevel] = useState("");
     const [documentationStandards, setDocumentationStandards] = useState("");
@@ -32,10 +34,17 @@ function CodeCommentingApp() {
     
 
 
-  
-
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (!code) {
+            setCodeError("To paste your code is required! ⚠️");
+            setLoading(false);
+            return;
+        }
+        
+        setCodeError(""); 
+
         setLoading(true);
         fetch("https://us-central1-ai-integrations960809.cloudfunctions.net/codeCommenting", {
             method: "POST",
@@ -140,9 +149,20 @@ function CodeCommentingApp() {
                     <textarea
                         className="flex items-center justify-center code-input w-1/2 resize-y lg:block md:w-2/3 lg:w-full h-32 p-2 border rounded-md"
                         value={code}
-                        onChange={(e) => setCode(e.target.value)}
+                        onChange={(e) => {
+                            setCode(e.target.value);
+                          }}
                         placeholder="Enter your code here..."
-                    />
+                        onBlur={() => {
+                            // Validate the code input when the user leaves the field
+                            if (!code) {
+                              setCodeError("Code input is required");
+                            }
+                          }}
+                        />
+                        {codeError && (
+  <div className="error-text">{codeError}</div>
+)}
                 </Box>
                 <Button
                     type="submit"
@@ -154,11 +174,22 @@ function CodeCommentingApp() {
                     Generate Code with Comments 📟
                 </Button>
             </Box>
-            {loading && (
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh' }}>
-                    <CircularProgress />
-                </Box>
-            )}
+             {loading && (
+  <><Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh' }}>
+          <CircularProgress />
+        </Box>
+        <Box sx={{ width: '100%'}}>
+            <Typography variant="body1" gutterBottom
+              sx={{
+                textAlign: 'center'
+              }}>
+              Time to Grab a Snack - We'll Be Ready in up to 45 Seconds.
+            </Typography>
+            <LinearProgress 
+          />
+          </Box></>
+  
+  )}
 
 
 

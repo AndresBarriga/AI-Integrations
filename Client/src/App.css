@@ -22,7 +22,15 @@
 }
 
 iframe#webpack-dev-server-client-overlay{display:none!important}
-
+.error-text {
+  border: 2px solid #ff0000; /* Red border */
+  background-color: #ffeeee; /* Light red background color */
+  color: #ff0000; /* Red text color */
+  padding: 8px; /* Padding around the error message */
+  margin-top: 8px; /* Spacing above the error message */
+  border-radius: 4px; /* Rounded corners */
+  font-weight: bold; /* Make the text bold */
+}
 .slider {
   display:flex;
   flex-direction: column;

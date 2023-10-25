@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
+import LinearProgress from '@mui/material/LinearProgress';
 import CircularProgress from '@mui/material/CircularProgress';
 import Paper from '@mui/material/Paper';
 import '@fontsource/roboto/300.css';
@@ -24,21 +25,10 @@ import StepContent from '@mui/material/StepContent';
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 
-/* PROMPT FOR TESTING PURPOSES
-
-As an user I want to be able to paste my code in the website so that I can have automatic generated AI comments wihtin my code without writting it myself.
-
-AC:
-1. Users can paste their code and it is returned back with inline comments
-1. a) returned comments make sense
-2. Users are able to choose wether they want to stick to any existing standard
-3. Users are able to choose the proficiency level of the person who is going to read the comments, content changes accordingly
-4. Users are able to choose which language the code is using
-5. Users can give a bit of context about what the feature is done */
-
 
 function TestAutomatedApp() {
     const [userStory, setUserStory] = useState("");
+    const [userStoryerror, setUserStoryerror] = useState("");
     const [testScenarios, setTestScenarios]= useState("");
     const [proposedScenarios, setProposedScenarios] = useState([]);
     const [responseScenarios, setResponseScenarios] = useState("");
@@ -48,6 +38,7 @@ function TestAutomatedApp() {
     const [code, setCode] = useState("");
     const [unitTest, setUnitTest] = useState("")
     const [responseUnitTest, setResponseUnitTest] = useState("");
+    const [codeError, setCodeError] = useState('');
 
 
     const [testScenariosSplitted, setTestScenariosSplitted] = useState([]);
@@ -109,6 +100,13 @@ function TestAutomatedApp() {
 
       const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (!userStory) {
+          setUserStoryerror("Feature Explanation is required")
+          setLoading(false);
+      return;
+        }
+        
         setLoading(true);
         fetch("https://us-central1-ai-integrations960809.cloudfunctions.net/testAutomatedUS", {
           method: "POST",
@@ -135,6 +133,14 @@ function TestAutomatedApp() {
 
       const handleSubmitsecondary = (e) => {
         e.preventDefault();
+
+        if (!code) {
+          setCodeError("To paste your code is required! ⚠️");
+          setLoading(false);
+          return;
+      }
+      setCodeError(""); 
+
         setLoadingUnitTest(true);
         fetch("https://us-central1-ai-integrations960809.cloudfunctions.net/testAutomatedCode", {
           method: "POST",
@@ -235,6 +241,8 @@ function TestAutomatedApp() {
                     onChange={(e) => setUserStory(e.target.value)}
                     multiline
                     maxRows={20}
+                    error={!!userStoryerror}
+                    helperText={userStoryerror}
                 />
 
                 <Button
@@ -249,9 +257,17 @@ function TestAutomatedApp() {
 
             </Box>
             {loading && (
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh' }}>
-                    <CircularProgress />
-                </Box>
+                <><Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh' }}>
+            <CircularProgress />
+          </Box><Box sx={{ width: '100%' }}>
+              <Typography variant="body1" gutterBottom
+                sx={{
+                  textAlign: 'center'
+                }}>
+                Time to Grab a Snack - We'll Be Ready in up to 45 Seconds.
+              </Typography>
+              <LinearProgress />
+            </Box></>
             )}
 
             
@@ -295,7 +311,16 @@ function TestAutomatedApp() {
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
                         placeholder="Enter your code here..."
+                        onBlur={() => {
+                          // Validate the code input when the user leaves the field
+                          if (!code) {
+                            setCodeError("Code input is required");
+                          }
+                        }}
                     />
+                    {codeError && (
+  <div className="error-text">{codeError}</div>
+)}
                 </Box>
                 <Box
                 component="div"
@@ -319,10 +344,21 @@ function TestAutomatedApp() {
                 </Button>
                 </Box>
                 {loadingUnitTest && (
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh' }}>
-                    <CircularProgress />
-                </Box>
-            )}
+  <><Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh' }}>
+          <CircularProgress />
+        </Box>
+        <Box sx={{ width: '100%'}}>
+            <Typography variant="body1" gutterBottom
+              sx={{
+                textAlign: 'center'
+              }}>
+              Time to Grab a Snack - We'll Be Ready in up to 45 Seconds.
+            </Typography>
+            <LinearProgress 
+          />
+          </Box></>
+  
+  )}
                 {responseUnitTest && (
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <div className="paper-wrapper" style={{ width: "75%" }}>
